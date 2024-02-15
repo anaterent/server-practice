@@ -1,0 +1,243 @@
+// Variables
+$primary-color: #ddb5ae
+$secondary-color: #2c3e50
+$font-family: "Arial", sans-serif
+$base-font-size: 16px
+$search-bar-height: 40px
+$rounded-border-radius: 20px
+
+// Mixins
+@mixin flexCenter
+  display: flex
+  justify-content: center
+  align-items: center
+
+@mixin buttonBase
+  padding: 0 1rem
+  border: none
+  cursor: pointer
+  background-color: $primary-color
+  color: white
+  outline: none
+  border-radius: 0 $rounded-border-radius $rounded-border-radius 0
+
+  &:hover
+    background-color: darken($primary-color, 10%)
+
+// Global styles
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+body
+  font-family: $font-family
+  font-size: $base-font-size
+
+// Layout
+.outer-container
+  display: flex
+  flex-direction: column
+  min-height: 100vh
+  .routes-container
+    flex: 1
+
+// Header
+.header
+  @include flexCenter
+  flex-direction: column
+  background-color: $primary-color
+  color: white
+  padding: 1rem
+  text-align: center
+  position: relative
+
+  h1
+    margin: 0
+    font-size: 50px
+
+  .header-link, .saved-link, .home-link
+    color: inherit
+    text-decoration: none
+
+  .saved-link
+    position: absolute
+    top: 1rem
+    right: 2rem
+    font-size: 30px
+  .home-link
+    position: absolute
+    top: 1rem
+    left: 2rem
+    font-size: 30px
+
+// Search Bar
+.search-bar
+  @include flexCenter
+  padding: 1rem 0
+  max-width: 600px
+  margin: 0 auto
+
+  form
+    display: flex
+
+  .search-input
+    width: 100%
+    height: $search-bar-height
+    padding: 0 1rem
+    border: 1px solid $secondary-color
+    border-right: none
+    border-radius: $rounded-border-radius 0 0 $rounded-border-radius
+    outline: none
+
+    &:focus
+      border-color: $primary-color
+
+  .search-button
+    @include buttonBase
+    height: $search-bar-height
+
+    i
+      font-size: 1rem
+// Filter styles
+.filter
+  display: flex
+  flex-direction: column
+  align-items: center
+
+  .filter-bubbles
+    display: flex
+    flex-wrap: wrap
+    gap: 10px
+    margin-bottom: 10px
+
+  .formNButton
+    display: flex
+
+  .bubble
+    display: flex
+    align-items: center
+    background-color: lightblue
+    border-radius: $rounded-border-radius
+    padding: 5px 10px
+    font-size: 14px
+    margin: 0 5px 5px 0
+
+    button
+      background-color: transparent
+      border: none
+      cursor: pointer
+
+      &:hover
+        background-color: darken(lightblue, 10%)
+
+    .tick
+      margin-left: 5px
+
+  input
+    @include flexCenter
+    border-radius: $rounded-border-radius 0 0 $rounded-border-radius
+  input, button
+    padding: 10px
+    border: 1px solid #ccc
+    font-size: $base-font-size
+
+  button
+    @include buttonBase
+    background-color: $primary-color
+    color: white
+    border: none
+    cursor: pointer
+
+    &:hover
+      background-color: darken($primary-color, 10%)
+// Content
+.content
+  display: flex
+  flex-wrap: wrap
+  padding: 2rem 15rem
+  gap: 1rem
+
+  .content-box
+    flex: 0 0 calc(33.333% - 1rem)
+    display: flex
+    flex-direction: column
+    align-items: center
+    text-align: center
+    justify-content: space-evenly
+    cursor: pointer
+
+    h2, p
+      color: $secondary-color
+
+    img
+      max-width: 80%
+      height: auto
+      border-radius: 8px
+
+// Detailed view styles
+.modal-backdrop
+  @include flexCenter
+  position: fixed
+  top: 0
+  left: 0
+  width: 100vw
+  height: 100vh
+  background-color: rgba(0, 0, 0, 0.5)
+  z-index: 10
+
+  .modal-content
+    width: 50%
+    height: 60%
+    background-color: white
+    padding: 20px
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+    display: flex
+    flex-direction: column
+    overflow: auto
+    border-radius: $rounded-border-radius
+
+    .modal-top-row
+      display: flex
+
+      .modal-image
+        width: 40%
+        img
+          width: 100%
+
+      .modal-header
+        padding-left: 15px
+
+        .saved-link
+          font-size: 30px
+          color: inherit
+          cursor: pointer
+
+    .modal-info
+      padding-top: 20px
+
+// Responsive adjustments
+@media (max-width: 768px)
+  .modal-content
+    width: 90%
+    .modal-header
+      flex-direction: column
+
+      .modal-image, .modal-title
+        width: 100%
+        padding-left: 0
+        padding-top: 20px
+
+// saved styles
+.saved h1
+  font-size: 30px
+  color: $secondary-color
+  padding: 2rem 15rem
+
+.footer
+  background-color: $secondary-color
+  color: white
+  padding: 1rem
+  width: 100%
+  display: flex
+  justify-content: center
