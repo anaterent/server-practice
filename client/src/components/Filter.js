@@ -31,23 +31,26 @@ function Filter({ requiredIngredients }) {
 
     return (
         <div className="filter">
-            <div className="filter-bubbles">
-                {ingredients.map((ingredient, index) => (
-                    <div key={index} className="bubble">
-                        {ingredient} <button className="tick" onClick={() => handleDelete(index)}>✓</button>
-                    </div>
-                ))}
-            </div>
-            <div className="formNButton">
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        value={input}
-                        onChange={handleInputChange}
-                        placeholder="Include ingredient..."
-                    />
-                </form>
-                <button onClick={handleFinalSubmit}>Find Recipe</button>
+            <div className='content-container'>
+                <div className="filter-bubbles">
+                    {ingredients.map((ingredient, index) => (
+                        <div key={index} className="bubble">
+                            {ingredient} <button className="tick" onClick={() => handleDelete(index)}>✓</button>
+                        </div>
+                    ))}
+                </div>
+                <div className="formNButton">
+                    <form onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            value={input}
+                            onChange={handleInputChange}
+                            placeholder="Include ingredient..."
+                        />
+                    </form>
+                    <button onClick={handleFinalSubmit}>Find Recipe</button>
+                </div>
+
             </div>
 
         </div>

@@ -4,7 +4,10 @@ function Footer(props) {
 
     return (
         <div className="footer">
-            footer
+            <div className="content-container">
+                footer
+            </div>
+
         </div>
     )
 }

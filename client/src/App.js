@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import './App.sass';
 import axios from 'axios';
 import {
@@ -7,10 +8,15 @@ import {
   Route,
 } from 'react-router-dom';
 
+import { AuthProvider } from "./contexts/AuthContext";
+
 import Header from './components/Header';
 import Home from './pages/Home';
 import Saved from './pages/Saved';
 import Footer from './components/Footer';
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
+import ErrorMessage from "./components/layouts/ErrorMessage";
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -19,6 +25,7 @@ function App() {
   const [savedRecipes, setSavedRecipes] = useState([]);
 
   useEffect(() => {
+
     axios.get('/api')
       .then(response => {
         console.log('fetched');
@@ -52,21 +59,27 @@ function App() {
   }
 
   return (
-    <Router>
+    <AuthProvider>
+      <Router>
 
-      <div className='outer-container'>
-        <Header />
+        <div className='outer-container'>
+          <Header />
+          <ErrorMessage />
 
-        <div className='routes-container'>
-          <Routes >
-            <Route path="/" element={<Home recipes={recipes} setRecipes={setRecipes} savedRecipe={handleSavedRecipe} savedRecipes={savedRecipes} transportSelectedRecipe={handleSelectRecipe} selectedRecipe={selectedRecipe} setSelectedRecipe={setSelectedRecipe} />} />
-            <Route path='/saved' element={<Saved savedRecipes={savedRecipes} />} />
-          </Routes>
+          <div className='routes-container'>
+            <Routes >
+              <Route path="/" element={<Home recipes={recipes} setRecipes={setRecipes} savedRecipe={handleSavedRecipe} savedRecipes={savedRecipes} transportSelectedRecipe={handleSelectRecipe} selectedRecipe={selectedRecipe} setSelectedRecipe={setSelectedRecipe} />} />
+              <Route path='/saved' element={<Saved savedRecipes={savedRecipes} />} />
+              <Route path='/sign_up' element={<SignUp />} />
+              <Route path='/sign_in' element={<SignIn />} />
+            </Routes>
+          </div>
+
+          <Footer />
         </div>
+      </Router>
+    </AuthProvider>
 
-        <Footer />
-      </div>
-    </Router>
 
   );
 }
