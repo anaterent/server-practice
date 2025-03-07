@@ -49,16 +49,23 @@ body
   justify-content: space-between
 
 .content-container
+  display: flex
+  flex: 1 1 calc(50% - 1rem) // Allows 2 per row on larger screens
   max-width: $container-max-width
   margin: 0 auto // Center the container
   padding: 0 $horizontal-padding-large // Apply initial horizontal padding for large screens
+  flex-wrap: wrap
 
   // Responsive adjustments with media queries
   @media (max-width: 768px)  // Adjust the breakpoint as needed
     padding: 0 $horizontal-padding-small // Smaller padding for smaller screens
+    flex: 1 1 100% // Makes each box take full width (1 per row)
+    max-width: 100%
 
   @media (max-width: 480px)  // Breakpoint for very small screens, like mobile devices
     padding: 0 // No horizontal padding for mobile screens
+    flex: 1 1 100% // Makes each box take full width (1 per row)
+    max-width: 100%
 
 // Layout
 .outer-container
@@ -191,21 +198,21 @@ body
 // Content
 .content
   display: flex
-  flex-wrap: wrap
   padding: 2rem
   gap: 1rem
 
   .content-box
-    flex: 0 0 calc(33.333% - 1rem)
     display: flex
+    flex: 1 1 50% // Ensures equal width (2 per row on big screens)
+
     flex-direction: column
     align-items: center
     text-align: center
     justify-content: space-evenly
     cursor: pointer
-
     h2, p
       color: $secondary-color
+      word-wrap: break-word
 
     img
       max-width: 80%
